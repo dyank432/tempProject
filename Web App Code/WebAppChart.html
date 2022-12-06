@@ -1,0 +1,48 @@
+<!-- published for easy access in one location, working code can be seen  -->
+<!-- from https://script.google.com/home/projects/1yIVhSS_QQv8vr7efTWpClGjzTibrL9tEpi-ZvolkjkOjxkNpRkn_6n6e/edit -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Project - Pi Temperature Graph</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(getTempData);
+
+      function getTempData(){
+
+        google.script.run.withSuccessHandler(drawChart).getData();
+        console.log(dataReturned);
+
+      }
+
+      function drawChart(dataReturned) {
+        console.log(dataReturned);
+        var data = google.visualization.arrayToDataTable(dataReturned);
+
+        var options = {
+          title: 'Bedroom Temperature Readings - Raspberry Pi',
+          vAxis: { title: 'Temperature (Celcius)'},
+          hAxis: { title: 'Date/Time'},
+          legend: { position: 'right'},
+          colors: ['#CC0000'],
+          pointSize: 6,
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('WebAppChart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+</head>
+<body>
+    
+    <div id="WebAppChart" style="width: 900px; height: 500px"></div>
+
+</body>
+</html>
