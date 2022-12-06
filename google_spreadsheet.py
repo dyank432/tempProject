@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# Main file for recording new temperature readings on google sheets.
+
 import os
 import glob
 import time
